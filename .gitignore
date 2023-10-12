@@ -1,3 +1,4 @@
 data
 geoextraction
 __pycache__
+*.db
