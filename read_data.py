@@ -14,5 +14,3 @@ print(df_coordenadas)
 
 # Cerrar la conexión a la base de datos
 conn.close()
-
-# Ahora df_coordenadas contiene los datos de la tabla "coordenadas" en un DataFrame de pandas

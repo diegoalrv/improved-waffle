@@ -25,7 +25,7 @@ def geocodificar_direcciones(subconjunto):
     # Conectar a la base de datos SQLite
     conn = sqlite3.connect('patentes_comerciales.db')
 
-    for index, row in subconjunto.iterrows():
+    for _, row in subconjunto.iterrows():
         direccion = row['Direccion_completa']
         try:
             ubicacion = geolocalizador.geocode(direccion)
@@ -77,8 +77,15 @@ if __name__ == '__main__':
     conn.commit()
     conn.close()
 
-    # Dividir el DataFrame en subconjuntos para procesamiento paralelo
-    num_procesadores = 4
+    todos_los_cores = True
+
+    if todos_los_cores:
+        # Dividir el DataFrame en subconjuntos para procesamiento paralelo
+        num_procesadores = 4
+    else:
+        # En caso de querer usar todos los cores
+        num_procesadores = multiprocessing.cpu_count()
+
     subconjuntos = [df[i:i + len(df) // num_procesadores] for i in range(0, len(df), len(df) // num_procesadores)]
     # Crear procesos para procesar los subconjuntos en paralelo
     procesos = []
