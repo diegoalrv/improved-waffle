@@ -19,8 +19,9 @@ merged_df = df_excel.merge(df_sqlite, left_on="Direccion_completa", right_on="di
 # Paso 4: Generar un GeoDataFrame a partir de las columnas de latitud y longitud
 from shapely import Point
 points = [Point(row['longitud'], row['latitud']) for _, row in merged_df.iterrows()]
+
 gdf = gpd.GeoDataFrame(merged_df, geometry=points)
-gdf.drop_duplicates(subset=['rol'], inplace=True)
+gdf.drop_duplicates(subset=['ROL'], inplace=True)
 
 # Paso 5: Guardar el GeoDataFrame como GeoJSON
-gdf.to_file("patentes_comerciales.geojson", driver='GeoJSON')
+gdf.to_file("./data/output/patentes_comerciales.geojson", driver='GeoJSON')
