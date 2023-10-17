@@ -3,7 +3,7 @@ import geopandas as gpd
 
 # Cargar el archivo
 gdf = gpd.read_file('./data/output/pois_patentes_comerciales.geojson')
-df = gdf[['type', 'name']]
+df = gdf[['id', 'type', 'name']]
 
 # Definir palabras clave para cada categoría
 keywords = {
